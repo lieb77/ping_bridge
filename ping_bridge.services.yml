@@ -1,0 +1,14 @@
+services:
+  logger.channel.ping_bridge:
+    parent: logger.channel_base
+    arguments: ['ping_bridge']
+   
+  ping_bridge.post:
+    class: Drupal\ping_bridge\PingBridgeService
+    arguments: ['@http_client', '@logger.channel.ping_bridge']
+    
+  ping_bridge.subscriber:
+    class: Drupal\ping_bridge\Routing\PingBridgeRouteSubscriber
+    arguments: [ '@entity_type.manager', '@config.factory' ]
+    tags:
+      - { name: event_subscriber }

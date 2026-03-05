@@ -1,0 +1,5 @@
+ping_bridge.ping_tab:
+  title: 'Ping Bridgy' 
+  route_name: ping_bridge.tab
+  base_route: entity.node.canonical
+  weight: 20

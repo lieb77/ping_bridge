@@ -1,0 +1,5 @@
+name: 'Ping bridge'
+type: module
+description: 'Sends a notification to Bridgy Fed when I save a post'
+package: 'Custom'
+core_version_requirement: ^10 || ^11

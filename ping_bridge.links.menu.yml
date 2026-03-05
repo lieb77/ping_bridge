@@ -1,0 +1,6 @@
+ping_bridge.settings:
+  title: Ping Bridge Settings
+  description: Select content types for Ping Bridge
+  parent: system.admin_config_services
+  route_name: ping_bridge.settings
+  weight: 10
