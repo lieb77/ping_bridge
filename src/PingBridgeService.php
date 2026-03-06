@@ -41,10 +41,10 @@ final class PingBridgeService {
 			'timeout' => 5,
 			]);
 		
-			$this->logger('ping_bridgeb')->info('Successfully pinged Bridgy Fed for: @url', ['@url' => $source]);	return FALSE;
+			$this->logger->info('Successfully pinged Bridgy Fed for: @url', ['@url' => $source]);	return FALSE;
 		} 
 		catch (\Exception $e) {
-			$this->logger('ping_bridgeb')->error('Failed to ping Bridgy Fed for @url. Error: @msg', [
+			$this->logger->error('Failed to ping Bridgy Fed for @url. Error: @msg', [
 				'@url' => $sourceUrl,
 				'@msg' => $e->getMessage(),
 			]);
