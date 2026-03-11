@@ -27,7 +27,7 @@ final class PingBridgeService {
      * @return string|bool
      * Error message or FALSE on success.
      */
-    public function ping(string $source, string $target, int $nid) {
+    public function ping($source, $target, $nid) {
         $results = [];
         
         $bridEndpoint  = 'https://brid.gy/publish/webmention';
