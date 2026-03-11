@@ -107,7 +107,7 @@ final class PingForm extends FormBase {
 	public function submitForm(array &$form, FormStateInterface $form_state): void {
 		$sourceUrl = $form_state->getValue('source');  
 		$target    = $form_state->getValue('target');  
-		$err = $this->pingBridge->ping($sourceUrl, $target), $this->nid;
+		$err = $this->pingBridge->ping($sourceUrl, $target, $this->nid);
 		
 		if (false === $err) {
 			$this->messenger()->addStatus($this->t("Bridgy has been pinged."));
