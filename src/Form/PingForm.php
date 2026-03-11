@@ -53,7 +53,6 @@ final class PingForm extends FormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state): array {
 
- 	
 	if (!empty($this->node)) {
 		// Save nid the route back.
 		$this->nid = $this->node->id();
@@ -108,7 +107,7 @@ final class PingForm extends FormBase {
 	public function submitForm(array &$form, FormStateInterface $form_state): void {
 		$sourceUrl = $form_state->getValue('source');  
 		$target    = $form_state->getValue('target');  
-		$err = $this->pingBridge->ping($sourceUrl, $target);
+		$err = $this->pingBridge->ping($sourceUrl, $target), $this->nid;
 		
 		if (false === $err) {
 			$this->messenger()->addStatus($this->t("Bridgy has been pinged."));
