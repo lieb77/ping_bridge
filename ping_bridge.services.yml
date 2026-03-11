@@ -5,7 +5,7 @@ services:
    
   ping_bridge.post:
     class: Drupal\ping_bridge\PingBridgeService
-    arguments: ['@http_client', '@logger.channel.ping_bridge']
+    arguments: ['@http_client', '@logger.channel.ping_bridge', '@entity_type.manager']
     
   ping_bridge.subscriber:
     class: Drupal\ping_bridge\Routing\PingBridgeRouteSubscriber

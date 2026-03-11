@@ -61,13 +61,24 @@ final class PingForm extends FormBase {
 		$link = $this->node->toUrl()->setAbsolute()->toString();
 	}
 
-
     $form['source'] = [
-      '#type' => 'textfield',
+      '#type'  => 'textfield',
       '#title' => $this->t('Full URL to the Post'),
       '#required' => TRUE,
       '#default_value' => $link,
     ];
+
+	$form['target'] = [
+		'#type'  => 'radios',
+		'#title' => $this->t('Bridgy service to ping'),
+		'#default_value' => 'both',
+		'#options' => [
+			'classic' => $this->t('Bridgy Classic'),
+			'fed'     => $this->t('Bridgy Fed'),
+			'both'    => $this->t('Both')
+		 ],	
+	];
+
 
     $form['actions'] = [
       '#type' => 'actions',
@@ -84,16 +95,11 @@ final class PingForm extends FormBase {
 	 * {@inheritdoc}
 	 */
 	public function validateForm(array &$form, FormStateInterface $form_state): void {
-		// @todo Validate the form here.
-		// Example:
-		// @code
-		//   if (mb_strlen($form_state->getValue('message')) < 10) {
+		
 		//     $form_state->setErrorByName(
 		//       'message',
 		//       $this->t('Message should be at least 10 characters.'),
 		//     );
-		//   }
-		// @endcode
 	}
 	
 	/**
@@ -101,10 +107,11 @@ final class PingForm extends FormBase {
 	*/
 	public function submitForm(array &$form, FormStateInterface $form_state): void {
 		$sourceUrl = $form_state->getValue('source');  
-		$err = $this->pingBridge->ping($sourceUrl);
+		$target    = $form_state->getValue('target');  
+		$err = $this->pingBridge->ping($sourceUrl, $target);
 		
 		if (false === $err) {
-			$this->messenger()->addStatus($this->t("Bridgy gas been pinged."));
+			$this->messenger()->addStatus($this->t("Bridgy has been pinged."));
 			$form_state->setRedirect('entity.node.canonical', ['node' => $this->nid]);
 		}
 		else {
