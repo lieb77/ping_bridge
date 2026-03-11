@@ -61,7 +61,7 @@ final class PingBridgeService {
     /**
      * Internal helper to handle the HTTP logic and response parsing.
      */
-    private function executePing(string $endpoint, string $targetUrl, string $sourceUrl) {
+    private function executePing($endpoint, $targetUrl, $sourceUrl) {    
         try {
             $response = $this->httpClient->post($endpoint, [
                 'form_params' => [
@@ -70,6 +70,7 @@ final class PingBridgeService {
                 ],
                 'timeout' => 10,
             ]);
+           
 
             $body = json_decode($response->getBody()->getContents(), TRUE);
             
@@ -88,13 +89,13 @@ final class PingBridgeService {
     /**
      * Creates the IndieWeb Syndication Entity.
      */
-    private function createSyndicationEntity(int $nid, string $syndicationUrl): void {
+    private function createSyndicationEntity($nid, $syndicationUrl): void {
         try {
             $storage = $this->entityTypeManager->getStorage('indieweb_syndication');
             
             $syndication = $storage->create([
                 'entity_id' => $nid,
-                'entity_type' => 'node',
+                'entity_type_id' => 'node',
                 'url' => $syndicationUrl,
             ]);
             

@@ -114,7 +114,7 @@ final class PingForm extends FormBase {
 			$form_state->setRedirect('entity.node.canonical', ['node' => $this->nid]);
 		}
 		else {
-			$this->messenger()->addStatus($this->t($err));
+			$this->messenger()->addError($this->t($err));
 			$form_state->setRebuild();
 		}
 
